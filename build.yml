@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+    - '*'
+  paths:
+    exclude:
+      - qa.azure-pipelines.yml
+      - live.azure-pipelines.yml
+      - qa.azure-pipelines.yml
+      - build.azure-pipelines.yml
+
+jobs:
+- job: Publish
+  displayName: Publish Inf Files
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: PublishPipelineArtifact@1
+    name: PublishInf
+    inputs:
+      targetPath: 'infrastructure'
+      ArtifactName: "Infrastructure"
