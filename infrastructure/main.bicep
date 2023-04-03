@@ -1,6 +1,6 @@
 targetScope = 'subscription'
 
-param primaryLocation
+param primaryLocation string
 
 param enableDisaterRecoveryDeploy bool
 
