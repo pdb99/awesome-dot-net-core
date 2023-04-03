@@ -28,6 +28,5 @@ jobs:
       templateLocation: 'Linked artifact'
       csmFile: '$(Pipeline.Workspace)/$(TemplateFile)'
       csmParametersFile: '$(Pipeline.Workspace)/$(TemplateParameterFile)'
-      #overrideParameters: '-enableDisaterRecoveryDeploy $(enableDisaterRecoveryDeploy)'
       deploymentMode: 'Incremental'
       deploymentName: '$(Build.BuildNumber)'   
