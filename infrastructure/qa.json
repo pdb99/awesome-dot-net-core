@@ -4,7 +4,9 @@
   "parameters": {
     "primaryLocation": {
       "value": "UK South"
+    },
+    "enableDisaterRecoveryDeploy": {
+      "value": false
     }
-
   }
 }
