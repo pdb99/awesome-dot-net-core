@@ -1,26 +1,33 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger: none
 pr: none
 
-pool:
-  vmImage: 'windows-latest'
 
-steps:
+jobs:
+- job: DeployInf
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download Infrastructure Artifacts'
+    inputs:
+      source: 'specific'
+      artifact: 'Infrastructure'
+      path: $(Pipeline.Workspace)
+      project: $(SourceProject)
+      pipeline: $(PipelineID)
+      runVersion: 'latestFromBranch'
+      runBranch: $(Build.SourceBranch)
 
-- task: AzureResourceManagerTemplateDeployment@3
-  name: InfrastructureDeploy
-  inputs:
-    deploymentScope: 'Subscription'
-    azureResourceManagerConnection: $(AzureServiceConnection)
-    subscriptionId: 'eb241554-8c5c-4748-b5fd-bb4b5b5af187'
-    location: 'uksouth'
-    templateLocation: 'Linked artifact'
-    csmFile: '$(Pipeline.Workspace)/$(TemplateFile)'
-    #csmParametersFile: '$(Pipeline.Workspace)/$(TemplateParameterFile)'
-    overrideParameters: '-enableDisaterRecoveryDeploy $(enableDisaterRecoveryDeploy)'
-    deploymentMode: 'Incremental'
-    deploymentName: '$(Build.BuildNumber)'   
+  - task: AzureResourceManagerTemplateDeployment@3
+    name: InfrastructureDeploy
+    inputs:
+      deploymentScope: 'Subscription'
+      azureResourceManagerConnection: $(AzureServiceConnection)
+      subscriptionId: 'eb241554-8c5c-4748-b5fd-bb4b5b5af187'
+      location: 'uksouth'
+      templateLocation: 'Linked artifact'
+      csmFile: '$(Pipeline.Workspace)/$(TemplateFile)'
+      #csmParametersFile: '$(Pipeline.Workspace)/$(TemplateParameterFile)'
+      overrideParameters: '-enableDisaterRecoveryDeploy $(enableDisaterRecoveryDeploy)'
+      deploymentMode: 'Incremental'
+      deploymentName: '$(Build.BuildNumber)'   
