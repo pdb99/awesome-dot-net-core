@@ -28,5 +28,6 @@ jobs:
       templateLocation: 'Linked artifact'
       csmFile: '$(Pipeline.Workspace)/$(TemplateFile)'
       csmParametersFile: '$(Pipeline.Workspace)/$(TemplateParameterFile)'
+      overrideParameters: '-enableDisasterRecoveryDeploy $(dr)'
       deploymentMode: 'Incremental'
       deploymentName: '$(Build.BuildNumber)'   
