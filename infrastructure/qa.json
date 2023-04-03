@@ -5,7 +5,7 @@
     "primaryLocation": {
       "value": "UK South"
     },
-    "enableDisaterRecoveryDeploy": {
+    "enableDisasterRecoveryDeploy": {
       "value": false
     }
   }
