@@ -38,7 +38,7 @@ steps:
   inputs:
     deploymentScope: 'Subscription'
     azureResourceManagerConnection: $(AzureServiceConnection)
-    subscriptionId: 'dd826d9c-b0a2-408a-a4dc-230352883355'
+    subscriptionId: $ServiceConnection
     location: $(AzureLocation)
     templateLocation: 'Linked artifact'
     csmFile: '$(Pipeline.Workspace)/$(TemplateFile)'
