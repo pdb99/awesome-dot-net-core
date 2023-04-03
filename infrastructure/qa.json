@@ -6,7 +6,7 @@
       "value": "UK South"
     },
     "enableDisasterRecoveryDeploy": {
-      "value": false
+      "value": true
     }
   }
 }
